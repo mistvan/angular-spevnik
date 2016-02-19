@@ -56,6 +56,7 @@ angular.module('spevnikApp')
                 }
 
                 // retrieve the identity data from the server, update the identity object, and then resolve.
+                _authenticated = true;
                 Account.get().$promise
                     .then(function (account) {
                         _identity = account.data;
