@@ -1,0 +1,11 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "songText"
+        }
+    ],
+    "dto": "no",
+    "service": "no"
+}
