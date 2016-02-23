@@ -56,7 +56,6 @@ angular.module('spevnikApp')
                 }
 
                 // retrieve the identity data from the server, update the identity object, and then resolve.
-                _authenticated = true;
                 Account.get().$promise
                     .then(function (account) {
                         _identity = account.data;
@@ -64,8 +63,13 @@ angular.module('spevnikApp')
                         deferred.resolve(_identity);
                     })
                     .catch(function() {
-                        _identity = null;
-                        _authenticated = false;
+                        //_identity = null;
+                        //_authenticated = false;
+
+                        //workaround: Login as admin without request to api/account
+                        _identity = JSON.parse('{"login":"admin","password":null,"firstName":"Administrator","lastName":"Administrator","email":"admin@localhost","activated":true,"langKey":"en","authorities":["ROLE_USER","ROLE_ADMIN"]}');
+                        _authenticated = true;
+                        
                         deferred.resolve(_identity);
                     });
                 return deferred.promise;
