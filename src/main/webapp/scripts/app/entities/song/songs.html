@@ -23,7 +23,7 @@
             <tbody>
                 <tr ng-repeat="song in songs track by song.id">
                     <td><a ui-sref="song.detail({id:song.id})">{{song.id}}</a></td>
-                    <td>{{song.songText}}</td>
+                    <td>{{song.slug}}</td>
                     <td>
                         <button type="submit"
                                 ui-sref="song.detail({id:song.id})"
