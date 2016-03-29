@@ -7,7 +7,7 @@
     Song.$inject = ['$resource'];
 
     function Song ($resource) {
-        var resourceUrl =  'api/songs/:id';
+        var resourceUrl =  'http://mistvan.spolocenstvomajak.sk/spevnik?rest_route=/wp/v2/song/:id';
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
