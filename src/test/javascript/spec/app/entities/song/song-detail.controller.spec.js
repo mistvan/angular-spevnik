@@ -2,7 +2,7 @@
 
 describe('Controller Tests', function() {
 
-    describe('Song Detail Controller', function() {
+    describe('Song Management Detail Controller', function() {
         var $scope, $rootScope;
         var MockEntity, MockSong;
         var createController;
@@ -28,7 +28,7 @@ describe('Controller Tests', function() {
 
         describe('Root Scope Listening', function() {
             it('Unregisters root scope listener upon scope destruction', function() {
-                var eventType = 'App:songUpdate';
+                var eventType = 'spevnikApp:songUpdate';
 
                 createController();
                 expect($rootScope.$$listenerCount[eventType]).toEqual(1);

@@ -1,0 +1,15 @@
+version: '2'
+services:
+    spevnik-app:
+        image: spevnik
+        external_links:
+            - spevnik-mysql:mysql
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod
+            - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/spevnik?useUnicode=true&characterEncoding=utf8&useSSL=false
+        ports:
+            - 8080:8080
+    spevnik-mysql:
+        extends:
+            file: mysql.yml
+            service: spevnik-mysql

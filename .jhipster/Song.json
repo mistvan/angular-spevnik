@@ -3,7 +3,8 @@
     "fields": [
         {
             "fieldId": 1,
-            "fieldName": "songText"
+            "fieldName": "songText",
+            "fieldType": "String"
         }
     ],
     "dto": "no",

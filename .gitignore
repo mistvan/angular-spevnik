@@ -1,8 +1,8 @@
 ######################
 # Project Specific
 ######################
-/src/main/webapp/assets/styles/main.css
-/src/main/webapp/dist
+/src/main/webapp/content/css/main.css
+/target/www/**
 
 ######################
 # Node
@@ -14,11 +14,6 @@
 # SASS
 ######################
 .sass-cache/**
-
-######################
-# bower
-######################
-/src/main/webapp/bower_components
 
 ######################
 # Eclipse
@@ -132,3 +127,9 @@ Desktop.ini
 # Maven Wrapper
 ######################
 !.mvn/wrapper/maven-wrapper.jar
+
+######################
+# ESLint
+######################
+.eslintcache
+src/main/webapp/bower_components/
