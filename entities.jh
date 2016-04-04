@@ -1,0 +1,14 @@
+
+entity Song {
+	slug String,
+    link String
+}
+
+entity Playlist {
+	slug String,
+    link String
+}
+
+relationship ManyToMany {
+	Playlist{songs} to Song{playlists}
+}

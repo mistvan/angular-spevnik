@@ -2,11 +2,11 @@
   "relationships": [
     {
       "relationshipId": 1,
-      "relationshipName": "playlists",
-      "otherEntityName": "playlist",
+      "relationshipName": "songs",
+      "otherEntityName": "song",
       "relationshipType": "many-to-many",
-      "ownerSide": false,
-      "otherEntityRelationshipName": "songs"
+      "otherEntityField": "id",
+      "ownerSide": true
     }
   ],
   "fields": [
@@ -21,6 +21,7 @@
       "fieldType": "String"
     }
   ],
+  "changelogDate": "20160401203635",
   "dto": "no",
   "pagination": "no",
   "service": "no"

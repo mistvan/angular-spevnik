@@ -1,0 +1,24 @@
+{
+    "spevnikApp": {
+        "playlist" : {
+            "home": {
+                "title": "Playlist",
+                "createLabel": "Dodaj Playlist",
+                "createOrEditLabel": "Dodaj lub edytuj: Playlist",
+                "search": "Search for Playlist"
+            },
+            "created": "A new Playlist is created with identifier {{ param }}",
+            "updated": "A Playlist is updated with identifier {{ param }}",
+            "deleted": "A Playlist is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Czy na pewno chcesz usunąć Playlist {{ id }}?"
+            },
+            "detail": {
+                "title": "Playlist"
+            },
+            "slug": "Slug",
+            "link": "Link",
+            "songs": "Songs"
+        }
+    }
+}

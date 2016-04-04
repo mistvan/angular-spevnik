@@ -41,8 +41,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @IntegrationTest
 public class SongResourceIntTest {
 
-    private static final String DEFAULT_SONG_TEXT = "AAAAA";
-    private static final String UPDATED_SONG_TEXT = "BBBBB";
+    private static final String DEFAULT_SLUG = "AAAAA";
+    private static final String UPDATED_SLUG = "BBBBB";
+    private static final String DEFAULT_LINK = "AAAAA";
+    private static final String UPDATED_LINK = "BBBBB";
 
     @Inject
     private SongRepository songRepository;
@@ -70,7 +72,8 @@ public class SongResourceIntTest {
     @Before
     public void initTest() {
         song = new Song();
-        song.setSongText(DEFAULT_SONG_TEXT);
+        song.setSlug(DEFAULT_SLUG);
+        song.setLink(DEFAULT_LINK);
     }
 
     @Test
@@ -89,7 +92,8 @@ public class SongResourceIntTest {
         List<Song> songs = songRepository.findAll();
         assertThat(songs).hasSize(databaseSizeBeforeCreate + 1);
         Song testSong = songs.get(songs.size() - 1);
-        assertThat(testSong.getSongText()).isEqualTo(DEFAULT_SONG_TEXT);
+        assertThat(testSong.getSlug()).isEqualTo(DEFAULT_SLUG);
+        assertThat(testSong.getLink()).isEqualTo(DEFAULT_LINK);
     }
 
     @Test
@@ -103,7 +107,8 @@ public class SongResourceIntTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(song.getId().intValue())))
-                .andExpect(jsonPath("$.[*].songText").value(hasItem(DEFAULT_SONG_TEXT.toString())));
+                .andExpect(jsonPath("$.[*].slug").value(hasItem(DEFAULT_SLUG.toString())))
+                .andExpect(jsonPath("$.[*].link").value(hasItem(DEFAULT_LINK.toString())));
     }
 
     @Test
@@ -117,7 +122,8 @@ public class SongResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(song.getId().intValue()))
-            .andExpect(jsonPath("$.songText").value(DEFAULT_SONG_TEXT.toString()));
+            .andExpect(jsonPath("$.slug").value(DEFAULT_SLUG.toString()))
+            .andExpect(jsonPath("$.link").value(DEFAULT_LINK.toString()));
     }
 
     @Test
@@ -138,7 +144,8 @@ public class SongResourceIntTest {
         // Update the song
         Song updatedSong = new Song();
         updatedSong.setId(song.getId());
-        updatedSong.setSongText(UPDATED_SONG_TEXT);
+        updatedSong.setSlug(UPDATED_SLUG);
+        updatedSong.setLink(UPDATED_LINK);
 
         restSongMockMvc.perform(put("/api/songs")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -149,7 +156,8 @@ public class SongResourceIntTest {
         List<Song> songs = songRepository.findAll();
         assertThat(songs).hasSize(databaseSizeBeforeUpdate);
         Song testSong = songs.get(songs.size() - 1);
-        assertThat(testSong.getSongText()).isEqualTo(UPDATED_SONG_TEXT);
+        assertThat(testSong.getSlug()).isEqualTo(UPDATED_SLUG);
+        assertThat(testSong.getLink()).isEqualTo(UPDATED_LINK);
     }
 
     @Test

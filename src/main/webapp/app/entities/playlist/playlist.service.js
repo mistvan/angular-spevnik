@@ -2,12 +2,12 @@
     'use strict';
     angular
         .module('spevnikApp')
-        .factory('Song', Song);
+        .factory('Playlist', Playlist);
 
-    Song.$inject = ['$resource'];
+    Playlist.$inject = ['$resource'];
 
-    function Song ($resource) {
-        var resourceUrl =  'http://mistvan.spolocenstvomajak.sk/spevnik?rest_route=/wp/v2/song/:id';
+    function Playlist ($resource) {
+        var resourceUrl =  'http://mistvan.spolocenstvomajak.sk/spevnik?rest_route=/wp/v2/playlist/:id';
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},

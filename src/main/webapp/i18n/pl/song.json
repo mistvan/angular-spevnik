@@ -16,7 +16,9 @@
             "detail": {
                 "title": "Song"
             },
-            "songText": "SongText"
+            "slug": "Slug",
+            "link": "Link",
+            "playlists": "Playlists"
         }
     }
 }

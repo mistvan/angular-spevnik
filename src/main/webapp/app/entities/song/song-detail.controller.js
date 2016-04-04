@@ -5,9 +5,9 @@
         .module('spevnikApp')
         .controller('SongDetailController', SongDetailController);
 
-    SongDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'entity', 'Song'];
+    SongDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'entity', 'Song', 'Playlist'];
 
-    function SongDetailController($scope, $rootScope, $stateParams, entity, Song) {
+    function SongDetailController($scope, $rootScope, $stateParams, entity, Song, Playlist) {
         var vm = this;
         vm.song = entity;
         vm.load = function (id) {

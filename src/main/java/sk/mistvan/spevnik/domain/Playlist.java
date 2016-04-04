@@ -1,6 +1,5 @@
 package sk.mistvan.spevnik.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -11,12 +10,12 @@ import java.util.Set;
 import java.util.Objects;
 
 /**
- * A Song.
+ * A Playlist.
  */
 @Entity
-@Table(name = "song")
+@Table(name = "playlist")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Song implements Serializable {
+public class Playlist implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -30,10 +29,12 @@ public class Song implements Serializable {
     @Column(name = "link")
     private String link;
 
-    @ManyToMany(mappedBy = "songss")
-    @JsonIgnore
+    @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Playlist> playlistss = new HashSet<>();
+    @JoinTable(name = "playlist_songs",
+               joinColumns = @JoinColumn(name="playlists_id", referencedColumnName="ID"),
+               inverseJoinColumns = @JoinColumn(name="songss_id", referencedColumnName="ID"))
+    private Set<Song> songss = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -59,12 +60,12 @@ public class Song implements Serializable {
         this.link = link;
     }
 
-    public Set<Playlist> getPlaylistss() {
-        return playlistss;
+    public Set<Song> getSongss() {
+        return songss;
     }
 
-    public void setPlaylistss(Set<Playlist> playlists) {
-        this.playlistss = playlists;
+    public void setSongss(Set<Song> songs) {
+        this.songss = songs;
     }
 
     @Override
@@ -75,11 +76,11 @@ public class Song implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Song song = (Song) o;
-        if(song.id == null || id == null) {
+        Playlist playlist = (Playlist) o;
+        if(playlist.id == null || id == null) {
             return false;
         }
-        return Objects.equals(id, song.id);
+        return Objects.equals(id, playlist.id);
     }
 
     @Override
@@ -89,7 +90,7 @@ public class Song implements Serializable {
 
     @Override
     public String toString() {
-        return "Song{" +
+        return "Playlist{" +
             "id=" + id +
             ", slug='" + slug + "'" +
             ", link='" + link + "'" +

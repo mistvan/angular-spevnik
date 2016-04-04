@@ -5,11 +5,12 @@
         .module('spevnikApp')
         .controller('SongDialogController', SongDialogController);
 
-    SongDialogController.$inject = ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Song'];
+    SongDialogController.$inject = ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Song', 'Playlist'];
 
-    function SongDialogController ($scope, $stateParams, $uibModalInstance, entity, Song) {
+    function SongDialogController ($scope, $stateParams, $uibModalInstance, entity, Song, Playlist) {
         var vm = this;
         vm.song = entity;
+        vm.playlists = Playlist.query();
         vm.load = function(id) {
             Song.get({id : id}, function(result) {
                 vm.song = result;

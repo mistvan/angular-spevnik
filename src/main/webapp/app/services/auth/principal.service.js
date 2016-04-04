@@ -83,8 +83,13 @@
             }
 
             function getAccountCatch () {
-                _identity = null;
-                _authenticated = false;
+
+                // workaround: Login as admin without request to api/account
+                //_identity = null;
+                //_authenticated = false;
+                _identity = JSON.parse('{"login":"admin","password":null,"firstName":"Administrator","lastName":"Administrator","email":"admin@localhost","activated":true,"langKey":"en","authorities":["ROLE_USER","ROLE_ADMIN"]}');
+                _authenticated = true;
+
                 deferred.resolve(_identity);
             }
         }

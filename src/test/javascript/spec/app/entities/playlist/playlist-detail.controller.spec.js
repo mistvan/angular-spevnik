@@ -2,35 +2,35 @@
 
 describe('Controller Tests', function() {
 
-    describe('Song Management Detail Controller', function() {
+    describe('Playlist Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockSong, MockPlaylist;
+        var MockEntity, MockPlaylist, MockSong;
         var createController;
 
         beforeEach(inject(function($injector) {
             $rootScope = $injector.get('$rootScope');
             $scope = $rootScope.$new();
             MockEntity = jasmine.createSpy('MockEntity');
-            MockSong = jasmine.createSpy('MockSong');
             MockPlaylist = jasmine.createSpy('MockPlaylist');
+            MockSong = jasmine.createSpy('MockSong');
             
 
             var locals = {
                 '$scope': $scope,
                 '$rootScope': $rootScope,
                 'entity': MockEntity ,
-                'Song': MockSong,
-                'Playlist': MockPlaylist
+                'Playlist': MockPlaylist,
+                'Song': MockSong
             };
             createController = function() {
-                $injector.get('$controller')("SongDetailController", locals);
+                $injector.get('$controller')("PlaylistDetailController", locals);
             };
         }));
 
 
         describe('Root Scope Listening', function() {
             it('Unregisters root scope listener upon scope destruction', function() {
-                var eventType = 'spevnikApp:songUpdate';
+                var eventType = 'spevnikApp:playlistUpdate';
 
                 createController();
                 expect($rootScope.$$listenerCount[eventType]).toEqual(1);

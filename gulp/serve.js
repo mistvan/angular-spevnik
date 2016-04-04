@@ -52,7 +52,7 @@ module.exports = function () {
         port: config.port,
         server: {
             baseDir: config.app,
-            middleware: proxies
+            //middleware: proxies
         }
     });
 

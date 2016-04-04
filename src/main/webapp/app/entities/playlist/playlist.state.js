@@ -9,62 +9,62 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('song', {
+        .state('playlist', {
             parent: 'entity',
-            url: '/song',
+            url: '/playlist',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'spevnikApp.song.home.title'
+                pageTitle: 'spevnikApp.playlist.home.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/song/songs.html',
-                    controller: 'SongController',
+                    templateUrl: 'app/entities/playlist/playlists.html',
+                    controller: 'PlaylistController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('song');
+                    $translatePartialLoader.addPart('playlist');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
             }
         })
-        .state('song-detail', {
+        .state('playlist-detail', {
             parent: 'entity',
-            url: '/song/{id}',
+            url: '/playlist/{id}',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'spevnikApp.song.detail.title'
+                pageTitle: 'spevnikApp.playlist.detail.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/song/song-detail.html',
-                    controller: 'SongDetailController',
+                    templateUrl: 'app/entities/playlist/playlist-detail.html',
+                    controller: 'PlaylistDetailController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('song');
+                    $translatePartialLoader.addPart('playlist');
                     return $translate.refresh();
                 }],
-                entity: ['$stateParams', 'Song', function($stateParams, Song) {
-                    return Song.get({id : $stateParams.id});
+                entity: ['$stateParams', 'Playlist', function($stateParams, Playlist) {
+                    return Playlist.get({id : $stateParams.id});
                 }]
             }
         })
-        .state('song.new', {
-            parent: 'song',
+        .state('playlist.new', {
+            parent: 'playlist',
             url: '/new',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/song/song-dialog.html',
-                    controller: 'SongDialogController',
+                    templateUrl: 'app/entities/playlist/playlist-dialog.html',
+                    controller: 'PlaylistDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
@@ -78,56 +78,56 @@
                         }
                     }
                 }).result.then(function() {
-                    $state.go('song', null, { reload: true });
+                    $state.go('playlist', null, { reload: true });
                 }, function() {
-                    $state.go('song');
+                    $state.go('playlist');
                 });
             }]
         })
-        .state('song.edit', {
-            parent: 'song',
+        .state('playlist.edit', {
+            parent: 'playlist',
             url: '/{id}/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/song/song-dialog.html',
-                    controller: 'SongDialogController',
+                    templateUrl: 'app/entities/playlist/playlist-dialog.html',
+                    controller: 'PlaylistDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['Song', function(Song) {
-                            return Song.get({id : $stateParams.id});
+                        entity: ['Playlist', function(Playlist) {
+                            return Playlist.get({id : $stateParams.id});
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('song', null, { reload: true });
+                    $state.go('playlist', null, { reload: true });
                 }, function() {
                     $state.go('^');
                 });
             }]
         })
-        .state('song.delete', {
-            parent: 'song',
+        .state('playlist.delete', {
+            parent: 'playlist',
             url: '/{id}/delete',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/song/song-delete-dialog.html',
-                    controller: 'SongDeleteController',
+                    templateUrl: 'app/entities/playlist/playlist-delete-dialog.html',
+                    controller: 'PlaylistDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        entity: ['Song', function(Song) {
-                            return Song.get({id : $stateParams.id});
+                        entity: ['Playlist', function(Playlist) {
+                            return Playlist.get({id : $stateParams.id});
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('song', null, { reload: true });
+                    $state.go('playlist', null, { reload: true });
                 }, function() {
                     $state.go('^');
                 });

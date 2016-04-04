@@ -1,0 +1,30 @@
+
+<div>
+    <h2><span translate="spevnikApp.playlist.detail.title">Playlist</span> {{vm.playlist.id}}</h2>
+    <hr>
+    <dl class="dl-horizontal">
+        <dt><span translate="spevnikApp.playlist.slug">Slug</dt></dt>
+        <dd>
+            <span>{{vm.playlist.slug}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="spevnikApp.playlist.link">Link</dt></dt>
+        <dd>
+            <span>{{vm.playlist.link}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="spevnikApp.playlist.songs">songs</span></dt>
+        <dd>
+            <span ng-repeat="song in vm.playlist.songs">
+                <a ui-sref="song-detail({id: {{song.ID}}})">{{song.ID}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+        <hr>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

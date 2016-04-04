@@ -10,9 +10,9 @@ import org.slf4j.LoggerFactory
 import scala.concurrent.duration._
 
 /**
- * Performance test for the Song entity.
+ * Performance test for the Playlist entity.
  */
-class SongGatlingTest extends Simulation {
+class PlaylistGatlingTest extends Simulation {
 
     val context: LoggerContext = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
     // Log all HTTP requests
@@ -48,7 +48,7 @@ class SongGatlingTest extends Simulation {
         "Authorization" -> "Bearer ${access_token}"
     )
 
-    val scn = scenario("Test the Song entity")
+    val scn = scenario("Test the Playlist entity")
         .exec(http("First unauthenticated request")
         .get("/api/account")
         .headers(headers_http)
@@ -72,26 +72,26 @@ class SongGatlingTest extends Simulation {
         .check(status.is(200)))
         .pause(10)
         .repeat(2) {
-            exec(http("Get all songs")
-            .get("/api/songs")
+            exec(http("Get all playlists")
+            .get("/api/playlists")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
-            .exec(http("Create new song")
-            .post("/api/songs")
+            .exec(http("Create new playlist")
+            .post("/api/playlists")
             .headers(headers_http_authenticated)
             .body(StringBody("""{"id":null, "slug":"SAMPLE_TEXT", "link":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_song_url"))).exitHereIfFailed
+            .check(headerRegex("Location", "(.*)").saveAs("new_playlist_url"))).exitHereIfFailed
             .pause(10)
             .repeat(5) {
-                exec(http("Get created song")
-                .get("${new_song_url}")
+                exec(http("Get created playlist")
+                .get("${new_playlist_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
-            .exec(http("Delete created song")
-            .delete("${new_song_url}")
+            .exec(http("Delete created playlist")
+            .delete("${new_playlist_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }
