@@ -31,6 +31,8 @@
         var saveWithOauthToken = function (response) {
             vm.accessToken = response.access_token;
 
+            vm.song.status = 'publish';
+            
             if (vm.song.id !== null) {
                 Song.update(vm.song, onSaveSuccess, onSaveError);
             } else {
