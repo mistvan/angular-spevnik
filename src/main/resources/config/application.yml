@@ -53,8 +53,8 @@ jhipster:
     security:
         authentication:
             oauth:
-                clientid: spevnikapp
-                secret: mySecretOAuthSecret
+                clientid: nd9sqLLUNhnTcyTCL6ZtmP7o1IOPDD
+                secret: SpGI40B1DjG0ozrNJNMtkMmpJsi2GW
                 # Token is valid 30 minutes
                 tokenValidityInSeconds: 1800
     swagger:
