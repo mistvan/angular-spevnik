@@ -5,9 +5,9 @@
         .module('spevnikApp')
         .controller('SongDialogController', SongDialogController);
 
-    SongDialogController.$inject = ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Song', 'Playlist'];
+    SongDialogController.$inject = ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Song', 'Playlist', 'AuthServerProvider'];
 
-    function SongDialogController ($scope, $stateParams, $uibModalInstance, entity, Song, Playlist) {
+    function SongDialogController ($scope, $stateParams, $uibModalInstance, entity, Song, Playlist, AuthServerProvider) {
         var vm = this;
         vm.song = entity;
         vm.playlists = Playlist.query();
@@ -16,6 +16,7 @@
                 vm.song = result;
             });
         };
+        vm.accessToken = '';
 
         var onSaveSuccess = function (result) {
             $scope.$emit('spevnikApp:songUpdate', result);
@@ -27,13 +28,20 @@
             vm.isSaving = false;
         };
 
-        vm.save = function () {
-            vm.isSaving = true;
+        var saveWithOauthToken = function (response) {
+            vm.accessToken = response.access_token;
+
             if (vm.song.id !== null) {
                 Song.update(vm.song, onSaveSuccess, onSaveError);
             } else {
-                Song.save(vm.song, onSaveSuccess, onSaveError);
+                Song.save({access_token:vm.accessToken}, vm.song, onSaveSuccess, onSaveError);
             }
+
+        }
+
+        vm.save = function () {
+            vm.isSaving = true;
+            AuthServerProvider.getOauthToken().success(saveWithOauthToken);
         };
 
         vm.clear = function() {
