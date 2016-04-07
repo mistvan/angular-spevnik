@@ -20,6 +20,10 @@
         ])
         .run(run);
 
+    angular.module("spevnikApp").config(['$sceProvider', function ($sceProvider) {
+        $sceProvider.enabled(false);
+    }]);
+
     run.$inject = ['stateHandler', 'translationHandler'];
 
     function run(stateHandler, translationHandler) {

@@ -22,6 +22,11 @@
         <hr>
     </dl>
 
+    <div ng-repeat="song in vm.playlist.songs">
+        <a ui-sref="song-detail({id: {{song.ID}}})">{{song.post_title}}</a>
+        <p ng-bind-html="song.post_content"></p>
+    </div>
+
     <button type="submit"
             onclick="window.history.back()"
             class="btn btn-info">
