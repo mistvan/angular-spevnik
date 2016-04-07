@@ -18,7 +18,7 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'POST' }
         });
     }
 })();
