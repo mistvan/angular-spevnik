@@ -34,7 +34,7 @@
             vm.song.status = 'publish';
             
             if (vm.song.id !== null) {
-                Song.update(vm.song, onSaveSuccess, onSaveError);
+                Song.update({id:vm.song.id, access_token:vm.accessToken}, vm.song, onSaveSuccess, onSaveError);
             } else {
                 Song.save({access_token:vm.accessToken}, vm.song, onSaveSuccess, onSaveError);
             }
