@@ -1,0 +1,28 @@
+{
+  "relationships": [
+    {
+      "relationshipId": 1,
+      "relationshipName": "songs",
+      "otherEntityName": "song",
+      "relationshipType": "many-to-many",
+      "otherEntityField": "id",
+      "ownerSide": true
+    }
+  ],
+  "fields": [
+    {
+      "fieldId": 1,
+      "fieldName": "slug",
+      "fieldType": "String"
+    },
+    {
+      "fieldId": 2,
+      "fieldName": "link",
+      "fieldType": "String"
+    }
+  ],
+  "changelogDate": "20160401203635",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no"
+}

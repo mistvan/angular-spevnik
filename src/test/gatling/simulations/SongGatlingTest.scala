@@ -1,3 +1,6 @@
+import java.nio.charset.StandardCharsets
+import java.util.Base64
+
 import _root_.io.gatling.core.scenario.Simulation
 import ch.qos.logback.classic.{Level, LoggerContext}
 import io.gatling.core.Predef._
@@ -32,14 +35,36 @@ class SongGatlingTest extends Simulation {
         "Accept" -> """application/json"""
     )
 
+    val authorization_header = "Basic " + Base64.getEncoder.encodeToString("spevnikapp:mySecretOAuthSecret".getBytes(StandardCharsets.UTF_8))
+
+    val headers_http_authentication = Map(
+        "Content-Type" -> """application/x-www-form-urlencoded""",
+        "Accept" -> """application/json""",
+        "Authorization"-> authorization_header
+    )
+
+    val headers_http_authenticated = Map(
+        "Accept" -> """application/json""",
+        "Authorization" -> "Bearer ${access_token}"
+    )
 
     val scn = scenario("Test the Song entity")
         .exec(http("First unauthenticated request")
         .get("/api/account")
         .headers(headers_http)
-        .check(status.is(401)))
+        .check(status.is(401))).exitHereIfFailed
         .pause(10)
-        .exec(http("Authentication"))
+        .exec(http("Authentication")
+        .post("/oauth/token")
+        .headers(headers_http_authentication)
+        .formParam("username", "admin")
+        .formParam("password", "admin")
+        .formParam("grant_type", "password")
+        .formParam("scope", "read write")
+        .formParam("client_secret", "mySecretOAuthSecret")
+        .formParam("client_id", "spevnikapp")
+        .formParam("submit", "Login")
+        .check(jsonPath("$.access_token").saveAs("access_token"))).exitHereIfFailed
         .pause(1)
         .exec(http("Authenticated request")
         .get("/api/account")
@@ -55,9 +80,9 @@ class SongGatlingTest extends Simulation {
             .exec(http("Create new song")
             .post("/api/songs")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "songText":null}""")).asJSON
+            .body(StringBody("""{"id":null, "slug":"SAMPLE_TEXT", "link":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_song_url")))
+            .check(headerRegex("Location", "(.*)").saveAs("new_song_url"))).exitHereIfFailed
             .pause(10)
             .repeat(5) {
                 exec(http("Get created song")

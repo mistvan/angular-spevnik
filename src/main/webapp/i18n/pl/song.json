@@ -1,0 +1,24 @@
+{
+    "spevnikApp": {
+        "song" : {
+            "home": {
+                "title": "Song",
+                "createLabel": "Dodaj Song",
+                "createOrEditLabel": "Dodaj lub edytuj: Song",
+                "search": "Search for Song"
+            },
+            "created": "A new Song is created with identifier {{ param }}",
+            "updated": "A Song is updated with identifier {{ param }}",
+            "deleted": "A Song is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Czy na pewno chcesz usunąć Song {{ id }}?"
+            },
+            "detail": {
+                "title": "Song"
+            },
+            "slug": "Slug",
+            "link": "Link",
+            "playlists": "Playlists"
+        }
+    }
+}
