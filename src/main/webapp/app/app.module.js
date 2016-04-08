@@ -20,9 +20,17 @@
         ])
         .run(run);
 
+    // disable html check for ng-bing-html
     angular.module("spevnikApp").config(['$sceProvider', function ($sceProvider) {
         $sceProvider.enabled(false);
     }]);
+
+    // ChordPro.js filter
+    angular.module("spevnikApp").filter('convertChords', function () {    
+        return function (input) {
+            return ChordPro.to_txt(input);
+        };
+    });
 
     run.$inject = ['stateHandler', 'translationHandler'];
 

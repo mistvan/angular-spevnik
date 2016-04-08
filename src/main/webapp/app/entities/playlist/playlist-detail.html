@@ -23,8 +23,8 @@
     </dl>
 
     <div ng-repeat="song in vm.playlist.songs">
-        <a ui-sref="song-detail({id: {{song.ID}}})">{{song.post_title}}</a>
-        <p ng-bind-html="song.post_content"></p>
+        <a ui-sref="song-detail({id: {{song.ID}}})"><h2>{{song.post_title}}</h2></a>
+        <pre ng-bind-html="song.post_content | convertChords"></pre>
     </div>
 
     <button type="submit"
