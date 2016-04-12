@@ -18,6 +18,7 @@
             },
             "slug": "Slug",
             "link": "Link",
+            "title": "Title",
             "songs": "Songs"
         }
     }

@@ -1,11 +1,12 @@
 
 <div>
     <h2><span translate="spevnikApp.playlist.detail.title">Playlist</span> {{vm.playlist.title.rendered}}</h2>
+    <p ng-bind-html="vm.playlist.content.rendered"></p>
     <hr>
     
     <div ng-repeat="song in vm.playlist.songs">
-        <a ui-sref="song-detail({id: {{song.ID}}})"><h2>{{song.post_title}}</h2></a>
-        <pre ng-bind-html="song.post_content | convertChords"></pre>
+        <h2><a ui-sref="song-detail({id: {{song.ID}}})">{{song.post_title}}</a></h2>
+        <pre style="font-size: 15px;" ng-bind-html="song.post_content | convertChords"></pre>
     </div>
 
     <button type="submit"

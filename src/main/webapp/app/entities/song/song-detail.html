@@ -1,19 +1,9 @@
 
 <div>
-    <h2><span translate="spevnikApp.song.detail.title">Song</span> {{vm.song.id}}</h2>
+    <h2><span translate="spevnikApp.song.detail.title">Song</span> {{vm.song.id}} {{vm.song.title.rendered}}</h2>
     <hr>
-    <dl class="dl-horizontal">
-        <dt><span translate="spevnikApp.song.slug">Slug</dt></dt>
-        <dd>
-            <span>{{vm.song.slug}}<span>
-        </dd>
-        <hr>
-        <dt><span translate="spevnikApp.song.link">Link</dt></dt>
-        <dd>
-            <span>{{vm.song.link}}<span>
-        </dd>
-        <hr>
-    </dl>
+    
+    <pre ng-bind-html="vm.song.content.rendered | convertChords"></pre>
 
     <button type="submit"
             onclick="window.history.back()"

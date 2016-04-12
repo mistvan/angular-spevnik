@@ -17,6 +17,7 @@
                 "title": "Song"
             },
             "slug": "Slug",
+            "title" : "Title",
             "link": "Link",
             "playlists": "Playlists"
         }

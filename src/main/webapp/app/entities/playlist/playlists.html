@@ -4,12 +4,12 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="playlist.new" >
+                <!-- <button class="btn btn-primary" ui-sref="playlist.new" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span  translate="spevnikApp.playlist.home.createLabel">
                         Create new Playlist
                     </span>
-                </button>
+                </button> -->
             </div>
         </div>
     </div>
@@ -19,8 +19,7 @@
             <thead>
                 <tr>
                     <th><span translate="global.field.id">ID</span></th>
-                    <th><span translate="spevnikApp.playlist.slug">Slug</span></th>
-                    <th><span translate="spevnikApp.playlist.link">Link</span></th>
+                    <th><span translate="spevnikApp.playlist.title">Title</span></th>
                     <th><span translate="spevnikApp.playlist.songs">songs</span></th>
                     <th></th>
                 </tr>
@@ -28,11 +27,11 @@
             <tbody>
                 <tr ng-repeat="playlist in vm.playlists track by playlist.id">
                     <td><a ui-sref="playlist-detail({id:playlist.id})">{{playlist.id}}</a></td>
-                    <td>{{playlist.slug}}</td>
-                    <td>{{playlist.link}}</td>
+                    <td><a ui-sref="playlist-detail({id:playlist.id})">{{playlist.title.rendered}}</a></td>
                     <td>
-                        <span ng-repeat="songs in playlist.songss">
-                            <a class="form-control-static" ui-sref="song-detail({id: {{songs.id}}})">{{songs.id}}</a>{{$last ? '' : ', '}}
+                        <span ng-show="!playlist.songs">Zatiaľ žiadne.</span>
+                        <span ng-repeat="song in playlist.songs">
+                            <a class="form-control-static" ui-sref="song-detail({id: {{song.ID}}})">{{song.post_title}}</a>{{$last ? '' : ', '}}
                         <span>
                     </td>
                     <td class="text-right">
@@ -43,7 +42,7 @@
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
                             </button>
-                            <button type="submit"
+                            <!-- <button type="submit"
                                     ui-sref="playlist.edit({id:playlist.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
@@ -54,7 +53,7 @@
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
-                            </button>
+                            </button> -->
                         </div>
                     </td>
                 </tr>
