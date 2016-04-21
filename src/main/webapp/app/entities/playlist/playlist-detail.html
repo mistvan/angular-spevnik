@@ -5,7 +5,21 @@
     <hr>
     
     <div ng-repeat="song in vm.playlist.songs">
-        <h2><a ui-sref="song-detail({id: {{song.ID}}})">{{song.post_title}}</a></h2>
+        
+        <div class="row">
+            <div class="col-xs-1 col-sm-6 col-md-6 col-lg-6">
+                <h2><a ui-sref="song-detail({id: {{song.ID}}})">{{song.post_title}}</a></h2>        
+            </div>
+            <div class="col-xs-1 col-sm-6 col-md-6 col-lg-6">
+                Text 
+                <button type="button" class="btn btn-default songtext-button-minus"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+                <button type="button" class="btn btn-default songtext-button-plus"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                Akordy 
+                <button type="button" class="btn btn-default chords-button-minus"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+                <button type="button" class="btn btn-default chords-button-plus"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+            </div>
+        </div>
+        
         <pre style="font-size: 15px;" ng-bind-html="song.post_content | convertChords"></pre>
     </div>
 

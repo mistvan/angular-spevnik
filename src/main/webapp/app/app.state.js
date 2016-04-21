@@ -30,3 +30,24 @@
         });
     }
 })();
+
+$( document ).ready(function() {
+    $(document).on('click', '.songtext-button-minus', function(){
+        currentSize = parseInt($('pre').css('font-size'));
+        $('pre').css('font-size', currentSize - 1);
+    });
+     $(document).on('click', '.songtext-button-plus', function(){
+        currentSize = parseInt($('pre').css('font-size'));
+        $('pre').css('font-size', currentSize + 1);
+    });
+
+    $(document).on('click', '.chords-button-minus', function(){
+        currentSize = parseInt($('.chord').css('font-size'));
+        $('.chord').css('font-size', currentSize - 1);
+    });
+
+    $(document).on('click', '.chords-button-plus', function(){
+        currentSize = parseInt($('.chord').css('font-size'));
+        $('.chord').css('font-size', currentSize + 1);
+    });
+});
